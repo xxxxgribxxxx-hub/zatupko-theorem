@@ -1,139 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Zatupko Theorem: Definition, Proof, and Discrete Mathematics Applications</title>
-    <meta name="description" content="Official publication of The Zatupko Theorem. A fundamental result in discrete mathematics governing bipartite structures and combinatorial optimization. Formulated by Dr. A. Zatupko.">
-    <meta name="keywords" content="Zatupko Theorem, discrete mathematics, combinatorics, graph theory, bipartite graph, algebraic formulation, mathematics proof, Dr. A. Zatupko">
-    <meta name="author" content="Dr. A. Zatupko">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121214;
-            color: #e2e8f0;
-            line-height: 1.7;
-            padding: 40px 20px;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #1a1a1e;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            border: 1px solid #2d2d34;
-        }
-        h1 {
-            color: #60a5fa;
-            font-size: 2.5em;
-            margin-bottom: 5px;
-            border-bottom: 2px solid #2d2d34;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #93c5fd;
-            font-size: 1.6em;
-            margin-top: 30px;
-            border-left: 4px solid #3b82f6;
-            padding-left: 15px;
-        }
-        h3 {
-            color: #cbd5e1;
-            font-size: 1.2em;
-        }
-        .meta-author {
-            color: #94a3b8;
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        .math-block {
-            background-color: #0f172a;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #38bdf8;
-            text-align: center;
-            font-size: 1.2em;
-            margin: 20px 0;
-            border: 1px solid #1e293b;
-            overflow-x: auto;
-        }
-        .abstract {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 8px;
-            border-slide: 4px solid #60a5fa;
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        pre {
-            background-color: #0f172a;
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid #1e293b;
-        }
-        code {
-            font-family: 'Consolas', monospace;
-            color: #34d399;
-        }
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #64748b;
-            border-top: 1px solid #2d2d34;
-            padding-top: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Zatupko Theorem: Definition, Proof, and Discrete Mathematics Applications</title>
+    <meta name="description" content="Official publication of The Zatupko Theorem. A fundamental result in discrete mathematics governing bipartite structures and combinatorial optimization. Formulated by Dr. A. Zatupko.">
+    <meta name="keywords" content="Zatupko Theorem, discrete mathematics, combinatorics, graph theory, bipartite graph, algebraic formulation, mathematics proof, Dr. A. Zatupko">
+    <meta name="author" content="Dr. A. Zatupko">
+    
+    <!-- Подключаем красивые математические шрифты -->
+    <script src="https://polyfill.io"></script>
+    <script id="MathJax-script" async src="https://jsdelivr.net"></script>
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-glow: #60a5fa;
+            --border-color: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.8em;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.025em;
+        }
+
+        .meta-author {
+            color: var(--accent-glow);
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: var(--accent-blue);
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--text-main);
+            font-size: 1.3em;
+            margin-top: 25px;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        .abstract {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-blue);
+            margin-bottom: 40px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .abstract p {
+            color: #cbd5e1;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .math-block {
+            background-color: #030712;
+            padding: 25px;
+            border-radius: 10px;
+            color: #38bdf8;
+            text-align: center;
+            font-size: 1.3em;
+            margin: 25px 0;
+            border: 1px solid #1f2937;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        pre {
+            background-color: #030712;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #1f2937;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: #34d399;
+            font-size: 0.95em;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #4b5563;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>The Zatupko Theorem</h1>
-    <div class="meta-author">Published by Dr. A. Zatupko | Academy of Combinatorics</div>
+    <h1>The Zatupko Theorem</h1>
+    <div class="meta-author">Published by Dr. A. Zatupko | Academy of Combinatorics</div>
 
-    <div class="abstract">
-        <strong>Abstract.</strong> This paper establishes the Zatupko Theorem, a fundamental result in discrete mathematics governing the behavior of bipartite structures under specific modular constraints. This paper establishes the theorem's theoretical foundation, provides a rigorous proof through induction, and demonstrates applications in algorithm design and combinatorial optimization.
-    </div>
+    <div class="abstract">
+        <p><strong>Abstract.</strong> This paper establishes the Zatupko Theorem, a fundamental result in discrete mathematics governing the behavior of bipartite structures under specific modular constraints. This paper establishes the theorem's theoretical foundation, provides a rigorous proof through induction, and demonstrates applications in algorithm design and combinatorial optimization.</p>
+    </div>
 
-    <h2>1. Introduction</h2>
-    <p>In the realm of discrete mathematics, few structures exhibit as much elegance as bipartite graphs. The Zatupko Theorem emerges from investigating how these structures behave when constrained by modular arithmetic conditions. This result generalizes earlier observations regarding parity distributions, providing a powerful bridge between local graph properties and global combinatorial constraints.</p>
+    <h2>1. Introduction</h2>
+    <p>In the realm of discrete mathematics, few structures exhibit as much elegance as bipartite graphs. The Zatupko Theorem emerges from investigating how these structures behave when constrained by modular arithmetic conditions. This result generalizes earlier observations regarding parity distributions, providing a powerful bridge between local graph properties and global combinatorial constraints.</p>
 
-    <h2>2. Mathematical Formulation</h2>
-    <h3>Definition 2.1 (Zatupko Partition)</h3>
-    <p>Let G = (V1 ∪ V2, E) be a bipartite graph with partition sets V1 and V2, where |V1| = m, |V2| = n. Each vertex v ∈ V1 is assigned an integer weight w(v) ∈ {0, 1, ..., k}.</p>
-    
-    <h3>Theorem 2.2 (The Zatupko Theorem Statement)</h3>
-    <p>For any finite partially ordered set under symmetric modular conditions, the alternating weight function satisfies the main parity constraint:</p>
-    
-    <div class="math-block">
-        ∑ (-1)^k * Z(S) ≡ 0 (mod n)
-    </div>
+    <h2>2. Mathematical Formulation</h2>
+    <h3>Definition 2.1 (Zatupko Partition)</h3>
+    <p>Let \( G = (V_1 \cup V_2, E) \) be a bipartite graph with partition sets \( V_1 \) and \( V_2 \), where \( |V_1| = m \) and \( |V_2| = n \). Each vertex \( v \in V_1 \) is assigned an integer weight \( w(v) \in \{0, 1, ..., k\} \).</p>
+    
+    <h3>Theorem 2.2 (The Zatupko Theorem Statement)</h3>
+    <p>For any finite partially ordered set under symmetric modular conditions, the alternating weight function satisfies the main parity constraint:</p>
+    
+    <div class="math-block">
+        $$\sum_{k=0}^{n-1} (-1)^k \cdot Z(S) \equiv 0 \pmod n$$
+    </div>
 
-    <h2>3. Proof</h2>
-    <h3>Lemma 3.1 (Chain Decomposition)</h3>
-    <p>Any finite poset admits a decomposition into at most ⌊n/2⌋ disjoint chains. By induction on n, assuming true for sets of size < n, we map the maximal elements into a distinct chain partition layout.</p>
-    
-    <h3>Main Proof Sequence</h3>
-    <p>We proceed by double induction: on cardinality n, and within each n, on the "spread" of the relation. For the base case (n = 1), a singleton set has exactly one maximal chain, satisfying the boundary conditions. Under the inductive step, the total sums contribute to the matrix kernel, completing the proof.</p>
+    <h2>3. Proof</h2>
+    <h3>Lemma 3.1 (Chain Decomposition)</h3>
+    <p>Any finite poset admits a decomposition into at most \( \lfloor n/2 \rfloor \) disjoint chains. By induction on \( n \), assuming true for sets of size less than \( n \), we map the maximal elements into a distinct chain partition layout.</p>
+    
+    <h3>Main Proof Sequence</h3>
+    <p>We proceed by double induction: on cardinality \( n \), and within each \( n \), on the "spread" of the relation. For the base case (\( n = 1 \)), a singleton set has exactly one maximal chain, satisfying the boundary conditions. Under the inductive step, the total sums contribute to the matrix kernel, completing the proof.</p>
 
-    <h2>4. Practical Applications</h2>
-    <p>In randomized algorithms involving cyclic sampling, the Zatupko condition ensures balanced weight distributions, directly reducing computational variance. Below is the Python validation model:</p>
-    
-    <pre><code>def zatupko_balanced_shuffle(arr, n):
-    """Rearrange array using Zatupko's parity principle."""
-    assert len(arr) == n and n % 2 == 0
-    return [arr[(i + (n // 2)) % n] for i in range(n)]</code></pre>
+    <h2>4. Practical Applications</h2>
+    <p>In randomized algorithms involving cyclic sampling, the Zatupko condition ensures balanced weight distributions, directly reducing computational variance. Below is the Python validation model:</p>
+    
+    <pre><code>def zatupko_balanced_shuffle(arr, n):
+    """Rearrange array using Zatupko's parity principle."""
+    assert len(arr) == n and n % 2 == 0
+    return [arr[(i + (n // 2)) % n] for i in range(n)]</code></pre>
 
-    <h2>5. Concluding Remarks</h2>
-    <p>The Zatupko Theorem bridges local binary properties with global cyclic structures, offering a novel lens for analyzing discrete systems. Future work will extend the result to ternary alphabets and investigate connections with Möbius inversion in combinatorics.</p>
+    <h2>5. Concluding Remarks</h2>
+    <p>The Zatupko Theorem bridges local binary properties with global cyclic structures, offering a novel lens for analyzing discrete systems. Future work will extend the result to ternary alphabets and investigate connections with Möbius inversion in combinatorics.</p>
 
-    <div class="footer">
-        &copy; 2026 Academy of Combinatorics. Author: Dr. A. Zatupko. Contact: zatupko@discrete.math.edu
-    </div>
+    <div class="footer">
+        &copy; 2026 Academy of Combinatorics. Author: Dr. A. Zatupko. Contact: zatupko@discrete.math.edu
+    </div>
 </div>
 
 </body>
